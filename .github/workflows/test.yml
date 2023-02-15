@@ -1,28 +1,28 @@
-name: Set up Hello
+name: Add Hello
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  setup:
+  add_hello:
     runs-on: windows-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Make bin directory
-        run: mkdir -p bin
-
-      - name: Create hello.bat
-        run: echo "echo Hello" > bin/hello.bat
-
-      - name: Add bin to PATH
-        run: |
-          echo "##[add-to-path]"$(pwd)/bin
-          echo "PATH = $env:PATH"
-          echo "BIN = "$(pwd)/bin
-          echo "##[add-to-path]$(pwd)/bin"
-
-      - name: Run Hello.bat
-        run: hello
-        shell: cmd
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Create Bin Folder
+      run: mkdir -p bin
+      
+    - name: Add Hello to Bin Folder
+      run: echo "echo Hello" > bin/hello.bat
+      
+    - name: Add Bin Folder to PATH
+      run: |
+        echo "export PATH=`pwd`/bin:\$PATH" >> $GITHUB_ENV
+        echo $PATH
+      
+    - name: Run Hello
+      run: hello.bat
+      shell: cmd
