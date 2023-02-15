@@ -1,0 +1,25 @@
+name: Add Hello.bat to PATH
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  set-up:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Add Hello.bat to PATH
+      run: |
+        mkdir -p bin
+        echo "echo Hello" > bin/hello.bat
+        echo "export PATH=\$PATH:`pwd`/bin" >> $GITHUB_ENV
+
+    - name: Show PATH
+      run: echo $PATH
+
+    - name: Run Hello.bat
+      run: hello
