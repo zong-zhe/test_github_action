@@ -16,7 +16,7 @@ jobs:
       run: mkdir -p bin
       
     - name: Add Hello to Bin Folder
-      run: echo "echo Hello" > bin/hello.bat
+      run: echo "echo Hello" > bin/hello.bat && chmod +x bin/hello.bat
       
     - name: Add Bin Folder to PATH
       run: |
