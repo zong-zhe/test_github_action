@@ -1,12 +1,13 @@
-name: Hello Workflow
+name: Set up Hello
+
 on: [push]
 
 jobs:
-  build:
+  setup:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Make bin directory
@@ -16,11 +17,12 @@ jobs:
         run: echo "echo Hello" > bin/hello.bat
 
       - name: Add bin to PATH
-        run: echo "export PATH=$PATH:`pwd`/bin" >> $GITHUB_ENV
+        run: |
+          echo "##[add-to-path]"$(pwd)/bin
+          echo "PATH = $env:PATH"
+          echo "BIN = "$(pwd)/bin
+          echo "##[add-to-path]$(pwd)/bin"
 
-      - name: Display PATH
-        run: echo $PATH
-
-      - name: Run Hello
-        run: hello.bat
-        shell: cmd
+      - name: Run Hello.bat
+        run: hello
+        shell: powershell
