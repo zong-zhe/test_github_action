@@ -25,4 +25,4 @@ jobs:
 
       - name: Run Hello.bat
         run: hello
-        shell: powershell
+        shell: cmd
