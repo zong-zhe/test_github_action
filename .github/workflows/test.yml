@@ -18,7 +18,7 @@ jobs:
     - name: Set Hello.bat Path
       run: |
         echo "echo Hello" > bin/hello.bat
-        echo "SETX PATH \"%PATH%;$(pwd)\bin\"" >> $GITHUB_ENV
+        echo "SETX PATH \"%PATH%;$(pwd)\bin\\"" >> $GITHUB_ENV
         $Env:PATH += ";$(pwd)\bin"
 
     - name: Run Hello.bat
