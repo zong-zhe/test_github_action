@@ -29,7 +29,8 @@ func TestLoadKclPkg(t *testing.T) {
 	if err == nil && kclPkg != nil {
 		t.Errorf("Failed to 'LoadKclPkg'.")
 	}
-	modfile.NewModFile(&opt.InitOptions{Name: "test_name", InitPath: testDir}).Store()
+
+	_ = modfile.NewModFile(&opt.InitOptions{Name: "test_name", InitPath: testDir}).Store()
 
 	kclPkg, err = LoadKclPkg(testDir)
 	if err != nil || kclPkg.modFile.Pkg.Name != "test_name" || kclPkg.modFile.Pkg.Version != "0.0.1" || kclPkg.modFile.Pkg.Edition != "0.0.1" {
