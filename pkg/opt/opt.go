@@ -2,11 +2,6 @@
 
 package opt
 
-// User input options from the cli.
-type Options struct {
-	init *InitOptions
-}
-
 // Input options of 'kpm init'.
 type InitOptions struct {
 	Name     string
