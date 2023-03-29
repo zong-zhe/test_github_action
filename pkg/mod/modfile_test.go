@@ -41,7 +41,12 @@ func TestModFileExists(t *testing.T) {
 		},
 	)
 	// generate 'kcl.mod' but still no 'kcl.mod.lock'.
-	modFile.Store()
+	err = modFile.Store()
+
+	if err != nil {
+		t.Errorf("test 'Store' failed.")
+	}
+
 	is_exist, err = ModFileExists(testDir)
 	if err != nil || !is_exist {
 		t.Errorf("test 'Store' failed.")
@@ -53,7 +58,12 @@ func TestModFileExists(t *testing.T) {
 	}
 
 	// generate 'kcl.mod' and 'kcl.mod.lock'.
-	modFile.StoreLockFile()
+	err = modFile.StoreLockFile()
+
+	if err != nil {
+		t.Errorf("test 'StoreLockFile' failed.")
+	}
+
 	is_exist, err = ModFileExists(testDir)
 	if err != nil || !is_exist {
 		t.Errorf("test 'StoreLockFile' failed.")
